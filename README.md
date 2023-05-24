@@ -1,1 +1,1 @@
-SpringBoot Angular MySQL Introduction by Fahmid
+SpringBoot, Angular MySQL Introduction by Fahmid
