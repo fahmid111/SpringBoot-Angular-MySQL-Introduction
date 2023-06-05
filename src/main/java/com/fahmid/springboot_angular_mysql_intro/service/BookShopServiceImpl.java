@@ -2,15 +2,22 @@ package com.fahmid.springboot_angular_mysql_intro.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fahmid.springboot_angular_mysql_intro.model.Book;
 import com.fahmid.springboot_angular_mysql_intro.model.BookShop;
+import com.fahmid.springboot_angular_mysql_intro.repository.BookRepository;
 import com.fahmid.springboot_angular_mysql_intro.repository.BookShopRepository;
 
 @Service
 public class BookShopServiceImpl implements BookShopService {
 
-    private final BookShopRepository bookShopRepository;
+    @Autowired
+    private BookShopRepository bookShopRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     public BookShopServiceImpl(BookShopRepository bookShopRepository) {
         this.bookShopRepository = bookShopRepository;
@@ -48,7 +55,9 @@ public class BookShopServiceImpl implements BookShopService {
             if(bookShop.getLocation() != null){
                 existingBookShop.setLocation(bookShop.getLocation());
             }
-            existingBookShop.setBooks(bookShop.getBooks());
+            if(bookShop.getBooks() != null){
+                existingBookShop.setBooks(bookShop.getBooks());
+            }
             if(bookShop.getContactNumber() != null){
                 existingBookShop.setContactNumber(bookShop.getContactNumber());
             }
@@ -61,7 +70,49 @@ public class BookShopServiceImpl implements BookShopService {
     }
 
     @Override
+    public BookShop addBookByIdToBookShop(Long bookshop_id, Long book_id){
+        Book book = bookRepository.findById(book_id).orElse(null);
+
+        BookShop bookShop = bookShopRepository.findById(bookshop_id).orElse(null);
+        
+        if(!bookShop.getBooks().contains(book)){
+            bookShop.getBooks().add(book);
+        }
+
+        return bookShopRepository.save(bookShop);
+    }
+
+    @Override
+    public BookShop deleteBookByIdToBookShop(Long bookshop_id, Long book_id){
+        Book book = bookRepository.findById(book_id).orElse(null);
+
+        BookShop bookShop = bookShopRepository.findById(bookshop_id).orElse(null);
+
+        if(bookShop.getBooks().contains(book)){
+            bookShop.getBooks().remove(book);
+        }
+        
+        return bookShopRepository.save(bookShop);       
+    }
+
+    @Override
     public void deleteBookShop(Long id) {
+        BookShop bookShop = bookShopRepository.findById(id).orElse(null);
+        bookShop.getBooks().clear();
         bookShopRepository.deleteById(id);
     }
+
+    @Override
+    public void deleteAllBookShops(){
+        List<Long> ids = bookShopRepository.findAllBookShopIds();
+
+        for (Long id : ids) {
+            BookShop bookShop = bookShopRepository.findById(id).orElse(null);
+            bookShop.getBooks().clear();
+        }
+
+        bookShopRepository.deleteAll();
+
+    }
+
 }

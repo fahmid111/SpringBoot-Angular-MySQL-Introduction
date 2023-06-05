@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fahmid.springboot_angular_mysql_intro.model.Book;
+import com.fahmid.springboot_angular_mysql_intro.model.BookShop;
 import com.fahmid.springboot_angular_mysql_intro.repository.BookRepository;
 
 @Service
@@ -63,6 +64,26 @@ public class BookService {
     }
 
     public void deleteBookByID(Long id) {
+        List<BookShop> bookshops = bookRepository.findBookShopsByBookId(id);
+        
+        for (BookShop bookShop : bookshops) {
+            bookShop.getBooks().removeIf(book -> book.getId().equals(id));
+        }
+        
         bookRepository.deleteById(id);
+    }
+
+    public void deleteAllBooks() {
+        List<Long> ids = bookRepository.findAllBookIds();
+        
+        for (Long id : ids) {
+            List<BookShop> bookshops = bookRepository.findBookShopsByBookId(id);
+        
+            for (BookShop bookShop : bookshops) {
+                bookShop.getBooks().removeIf(book -> book.getId().equals(id));
+            }
+        }
+
+        bookRepository.deleteAll();
     }
 }
