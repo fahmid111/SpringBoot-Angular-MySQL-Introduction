@@ -1,0 +1,23 @@
+<div class="card-container">
+  <div *ngFor="let bookshop of bookshops">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title class="title">{{ bookshop.shopName }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <br />
+        <p><strong>Location:</strong> {{ bookshop.location }}</p>
+        <p><strong>Contact Number:</strong> {{ bookshop.contactNumber }}</p>
+        <p><strong>Email:</strong> {{ bookshop.email }}</p>
+        <button class="delete-button" (click)="deleteBookshop(bookshop.id)">
+          Delete
+        </button>
+        <button class="view-button" (click)="viewBookshop(bookshop.id)">
+          View
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<app-bookshop-view [bookshop]="bookshopToView"></app-bookshop-view>

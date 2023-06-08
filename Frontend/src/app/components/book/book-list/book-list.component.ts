@@ -4,10 +4,10 @@ import { BookService } from '../../../services/bookservices/book.service';
 
 @Component({
   selector: 'app-booklist',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
+  templateUrl: './book-list.component.html',
+  styleUrls: ['./book-list.component.css'],
 })
-export class ListComponent implements OnInit {
+export class BookListComponent implements OnInit {
   books: Book[] = [];
 
   constructor(private bookService: BookService) {}

@@ -1,11 +1,11 @@
-<header>
-  <nav>
-    <ul>
-      <li>
-        <a routerLink="/book"><app-book></app-book></a>
-      </li>
-    </ul>
-  </nav>
-</header>
-
-<main></main>
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="navbar-row">
+    <span class="navbar-title">Bookstore</span>
+    <div class="navbar-links">
+      <a mat-button routerLink="/book">All Books</a>
+      <a mat-button routerLink="/bookshop">All Bookshops</a>
+      <a mat-button routerLink="/add-book">Add Book</a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>
