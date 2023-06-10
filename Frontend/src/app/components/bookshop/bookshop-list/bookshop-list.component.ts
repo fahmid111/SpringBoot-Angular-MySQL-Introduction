@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Bookshop } from '../../../models/bookshop';
 import { BookshopService } from '../../../services/bookshopservices/bookshop.service';
 
@@ -10,7 +11,10 @@ import { BookshopService } from '../../../services/bookshopservices/bookshop.ser
 export class BookshopListComponent implements OnInit {
   bookshops: Bookshop[] = [];
   bookshopToView!: Bookshop;
-  constructor(private bookshopService: BookshopService) {}
+  constructor(
+    private bookshopService: BookshopService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchBookshops();
@@ -44,12 +48,27 @@ export class BookshopListComponent implements OnInit {
   viewBookshop(id: number): void {
     this.bookshopService.viewBookshop(id).subscribe(
       (response: Bookshop) => {
-        this.bookshopToView = response;
+        this.router.navigate(['/view-bookshop'], {
+          state: { toViewbookshop: response },
+        });
         console.log('Bookshop viewed successfully');
-        console.log(this.bookshopToView);
       },
       (error) => {
         console.error('Error viewing bookshop:', error);
+      }
+    );
+  }
+
+  editBookshopCall(id: number): void {
+    this.bookshopService.getTheBookshop(id).subscribe(
+      (response: Bookshop) => {
+        console.log(response);
+        this.router.navigate(['/edit-bookshop'], {
+          state: { toUpdatebookshop: response },
+        });
+      },
+      (error) => {
+        console.error('Error getting the Bookshop:', error);
       }
     );
   }

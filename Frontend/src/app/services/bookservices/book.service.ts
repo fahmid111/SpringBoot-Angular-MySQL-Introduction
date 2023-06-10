@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { Book } from '../../models/book';
 import { BookshopService } from '../bookshopservices/bookshop.service';
 
@@ -27,14 +26,25 @@ export class BookService {
     return this.http.delete<void>(url);
   }
 
-  public addBook(bookData: any): Observable<any> {
-    const { bookshop, ...bookDetails } = bookData;
-    const bookArr: Book[] = [bookData];
-    return this.http.post<any>(this.bookApiUrl, bookArr).pipe(
-      switchMap((response) => {
-        const bookId = response[0].id;
-        return this.bookshopService.addBookToBookshop(bookshop, bookId);
-      })
-    );
+  public addBook(book: Book): Observable<any> {
+    // const { bookshop, ...bookDetails } = bookData;
+    const bookArr: Book[] = [book];
+    return this.http.post<any>(this.bookApiUrl, bookArr);
+    // .pipe(
+    //   switchMap((response) => {
+    //     const bookId = response[0].id;
+    //     return this.bookshopService.addBookToBookshop(bookshop, bookId);
+    //   })
+    // );
+  }
+
+  public getTheBook(id: number): Observable<Book> {
+    const url = `${this.bookApiUrl}/${id}`;
+    return this.http.get<Book>(url);
+  }
+
+  public editBook(updatedBook: Book): Observable<any> {
+    const url = `${this.bookApiUrl}/${updatedBook.id}`;
+    return this.http.put<any>(url, updatedBook);
   }
 }

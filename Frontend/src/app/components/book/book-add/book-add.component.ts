@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Bookshop } from '../../../models/bookshop';
 import { BookService } from '../../../services/bookservices/book.service';
-import { BookshopService } from '../../../services/bookshopservices/bookshop.service';
 
 @Component({
   selector: 'app-book-add',
@@ -12,12 +10,12 @@ import { BookshopService } from '../../../services/bookshopservices/bookshop.ser
 })
 export class BookAddComponent implements OnInit {
   bookForm: FormGroup;
-  bookshops: Bookshop[] = [];
+  // bookshops: Bookshop[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private bookService: BookService,
-    private bookShopService: BookshopService,
+    // private bookShopService: BookshopService,
     private router: Router
   ) {
     this.bookForm = this.formBuilder.group({
@@ -29,25 +27,25 @@ export class BookAddComponent implements OnInit {
       pages: ['', Validators.required],
       year: ['', Validators.required],
       price: ['', Validators.required],
-      bookshop: ['', Validators.required],
+      // bookshop: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.fetchBookshops();
+    // this.fetchBookshops();
   }
 
-  fetchBookshops(): void {
-    this.bookShopService.getBookshops().subscribe(
-      (response: Bookshop[]) => {
-        this.bookshops = response;
-        console.log('Bookshops loaded successfully');
-      },
-      (error) => {
-        console.error('Error loading bookshops:', error);
-      }
-    );
-  }
+  // fetchBookshops(): void {
+  //   this.bookShopService.getBookshops().subscribe(
+  //     (response: Bookshop[]) => {
+  //       this.bookshops = response;
+  //       console.log('Bookshops loaded successfully');
+  //     },
+  //     (error) => {
+  //       console.error('Error loading bookshops:', error);
+  //     }
+  //   );
+  // }
 
   onSubmit(): void {
     if (this.bookForm.valid) {

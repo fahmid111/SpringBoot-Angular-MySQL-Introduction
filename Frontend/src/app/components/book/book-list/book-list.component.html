@@ -1,76 +1,31 @@
-<!-- <div class="list-container">
-  <h2>Books</h2>
-
-  <div class="card-list">
-    <div class="card" *ngFor="let book of books">
-      <div class="card-header">
-        {{ book.title }}
-      </div>
-      <div class="card-body">
-        <p><strong>Author:</strong> {{ book.author }}</p>
-        <p><strong>Country:</strong> {{ book.country }}</p>
-        <p><strong>Language:</strong> {{ book.language }}</p>
-        <p>
-          <strong>Link:</strong>
-          <a href="{{ book.link }}" target="_blank">{{ book.title }}</a>
-        </p>
-        <p><strong>Pages:</strong> {{ book.pages }}</p>
-        <p><strong>Year:</strong> {{ book.year }}</p>
-        <p><strong>Price:</strong> ${{ book.price }}</p>
-        <button
-          class="btn btn-danger delete-button"
-          (click)="deleteBook(book.id)"
-        >
-          Delete
-        </button>
+<div class="bookcontainer">
+  <div *ngFor="let book of books">
+    <div class="book">
+      <div
+        class="bookpic"
+        style="background-image: url('{{ book.link }}');"
+      ></div>
+      <div class="bookinfo">
+        <div class="booktitlebox">
+          <div class="title">{{ book.title }}</div>
+          <div class="author">{{ book.author }}</div>
+        </div>
+        <div>
+          <p><strong>Country:</strong> {{ book.country }}</p>
+          <p><strong>Language:</strong> {{ book.language }}</p>
+          <p><strong>Pages:</strong> {{ book.pages }}</p>
+          <p><strong>Year:</strong> {{ book.year }}</p>
+          <p><strong>Price:</strong> ${{ book.price }}</p>
+        </div>
+        <div class="buttons">
+          <button class="edit-button" (click)="editBookCall(book.id)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="delete-button" (click)="deleteBook(book.id)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</div> -->
-
-<!-- <div class="book-grid">
-  <div class="book-card" *ngFor="let book of books">
-    <h3>{{ book.title }}</h3>
-    <p><strong>Author:</strong> {{ book.author }}</p>
-    <p><strong>Country:</strong> {{ book.country }}</p>
-    <p><strong>Language:</strong> {{ book.language }}</p>
-    <p>
-      <strong>Link:</strong>
-      <a href="{{ book.link }}" target="_blank">{{ book.title }}</a>
-    </p>
-    <p><strong>Pages:</strong> {{ book.pages }}</p>
-    <p><strong>Year:</strong> {{ book.year }}</p>
-    <p><strong>Price:</strong> ${{ book.price }}</p>
-    <button class="btn btn-danger delete-button" (click)="deleteBook(book.id)">
-      Delete
-    </button>
-  </div>
-</div> -->
-
-<div class="card-container">
-  <div *ngFor="let book of books">
-    <mat-card class="card">
-      <mat-card-header>
-        <mat-card-title class="title">{{ book.title }}</mat-card-title>
-        <mat-card-subtitle class="subtitle">{{
-          book.author
-        }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content class="content">
-        <br />
-        <p><strong>Country:</strong> {{ book.country }}</p>
-        <p><strong>Language:</strong> {{ book.language }}</p>
-        <p>
-          <strong>Link: </strong>
-          <a href="{{ book.link }}" target="_blank">{{ book.title }}</a>
-        </p>
-        <p><strong>Pages:</strong> {{ book.pages }}</p>
-        <p><strong>Year:</strong> {{ book.year }}</p>
-        <p><strong>Price:</strong> ${{ book.price }}</p>
-        <button class="delete-button" (click)="deleteBook(book.id)">
-          Delete
-        </button>
-      </mat-card-content>
-    </mat-card>
   </div>
 </div>

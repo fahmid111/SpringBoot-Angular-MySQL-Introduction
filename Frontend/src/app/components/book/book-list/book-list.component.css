@@ -1,61 +1,100 @@
-.card-container {
+.bookcontainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 20px;
-  justify-items: center;
+  justify-content: flex-start;
   padding: 20px;
 }
 
-@media (max-width: 1024px) {
-  .card-container {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .card-container {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    padding: 10px;
-  }
-}
-
-.card {
-  width: 250px;
-  height: 100%;
-  background-color: #b1f288;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.book {
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  background: rgb(246, 246, 246);
+  display: flex;
+  overflow: hidden;
   transition: transform 0.3s ease-in-out;
 }
 
-.card:hover {
+.book:hover {
   transform: scale(1.15);
 }
 
-.content {
-  padding: 16px;
+.bookpic {
+  flex-basis: 50%;
+  background-size: cover;
+  background-position: center;
 }
 
-.title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 8px;
+.bookpic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.subtitle {
-  font-size: 14px;
-  color: #777777;
-  margin-bottom: 8px;
+.bookinfo {
+  flex-grow: 1;
+  padding: 10px;
 }
 
-.delete-button {
-  background-color: #e53935;
-  color: #fff;
+.booktitlebox {
+  height: 80px;
+}
+
+.bookinfo .title {
+  font-size: 16px;
+  line-height: 1.2;
+  margin-bottom: 5px;
+  color: #5a5a5a;
+}
+
+.bookinfo .author {
+  font-size: 12px;
+  color: #8a8a8a;
+  font-style: normal;
+  margin-bottom: 10px;
+}
+
+.bookinfo p {
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+.book a {
+  color: #0000ff;
+  text-decoration: none;
+}
+
+.book a:hover {
+  text-decoration: underline;
+}
+
+.bookinfo .buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: right;
+}
+
+.delete-button,
+.edit-button {
+  display: flex;
+  align-items: center;
+  padding: 5px;
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  background: none;
+  color: #000;
   cursor: pointer;
 }
 
 .delete-button:hover {
-  background-color: #c62828;
+  color: #e64444;
+}
+
+.edit-button:hover {
+  color: #65f740;
+}
+
+.delete-button i,
+.edit-button i {
+  margin-right: 5px;
 }

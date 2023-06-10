@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, switchMap } from 'rxjs';
+import { Book } from 'src/app/models/book';
 import { Bookshop } from '../../models/bookshop';
 
 @Injectable({
@@ -32,6 +33,50 @@ export class BookshopService {
     book_id: number
   ): Observable<any> {
     const url = `${this.bookshopApiUrl}/addBook`;
+
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('bookshop_id', String(bookshop_id));
+    queryParams = queryParams.append('book_id', String(book_id));
+
+    return this.http.put(url, null, { params: queryParams });
+  }
+
+  public addBookshop(bookshopData: any): Observable<any> {
+    const { books, ...bookshopDetails } = bookshopData;
+    return this.http.post<any>(this.bookshopApiUrl, bookshopDetails).pipe(
+      switchMap((response) => {
+        const bookshop_id = response.id;
+        const bookRequests = books.map((book: any) =>
+          this.addBookToBookshop(bookshop_id, book.id)
+        );
+        return forkJoin(bookRequests);
+      })
+    );
+  }
+  public getTheBookshop(id: number): Observable<Bookshop> {
+    const url = `${this.bookshopApiUrl}/${id}`;
+    return this.http.get<Bookshop>(url);
+  }
+  public editBookshop(
+    updatedBookshop: Bookshop,
+    booksToAdd: Book[],
+    booksThatStays: Book[]
+  ): Observable<any> {
+    const joinedBooks: Book[] = [...booksToAdd, ...booksThatStays];
+    console.log('jb');
+    console.log(joinedBooks);
+
+    updatedBookshop.books = joinedBooks;
+    const url = `${this.bookshopApiUrl}/${updatedBookshop.id}`;
+    console.log(updatedBookshop);
+    return this.http.put<any>(url, updatedBookshop);
+  }
+
+  public deleteBookFromBookshop(
+    bookshop_id: number,
+    book_id: number
+  ): Observable<any> {
+    const url = `${this.bookshopApiUrl}/removeBook`;
 
     let queryParams = new HttpParams();
     queryParams = queryParams.append('bookshop_id', String(bookshop_id));
