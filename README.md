@@ -15,7 +15,7 @@ The project entails a web-based application designed for users to oversee a coll
 ## Features
 The web application offers the following features:
 
-**Book Management:** Users can perform CRUD operations on the collection of books, including creating new books, viewing existing books, updating book details, and deleting books.
+**Book Management:** Users can perform CRUD operations on the collection of books, including creating new books, viewing existing books, updating book details, and deleting books. \n
 **Bookshop Management:** Users can perform CRUD operations on the collection of bookshops, including creating new booksshop, viewing existing bookshops, updating bookshop details, adding or removing books from bookshops and deleting bookshops.
 **Responsive Design:** The frontend interface is designed to provide a seamless user experience.
 
