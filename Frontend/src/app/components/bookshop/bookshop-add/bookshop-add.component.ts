@@ -22,10 +22,10 @@ export class BookshopAddComponent implements OnInit {
     private router: Router
   ) {
     this.bookshopForm = this.formBuilder.group({
-      shopNumber: ['', Validators.required],
+      shopNumber: [Validators.required, Validators.min(0)],
       shopName: ['', Validators.required],
       location: ['', Validators.required],
-      contactNumber: ['', Validators.required],
+      contactNumber: [Validators.required, Validators.min(0)],
       email: ['', Validators.required],
     });
   }

@@ -25,9 +25,9 @@ export class BookEditComponent {
       country: ['', Validators.required],
       language: ['', Validators.required],
       link: ['', Validators.required],
-      pages: ['', Validators.required],
-      year: ['', Validators.required],
-      price: ['', Validators.required],
+      pages: ['', [Validators.required, Validators.min(0)]],
+      year: ['', [Validators.required, Validators.min(0)]],
+      price: ['', [Validators.required, Validators.min(0)]],
     });
   }
   ngOnInit(): void {

@@ -62,7 +62,7 @@ export class BookshopService {
     updatedBookshop: Bookshop,
     booksToAdd: Book[],
     booksThatStays: Book[]
-  ): Observable<any> {
+  ): Observable<Bookshop> {
     const joinedBooks: Book[] = [...booksToAdd, ...booksThatStays];
     console.log('jb');
     console.log(joinedBooks);

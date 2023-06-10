@@ -27,10 +27,10 @@ export class BookshopEditComponent {
     private router: Router
   ) {
     this.editBookshopForm = this.formBuilder.group({
-      shopNumber: ['', Validators.required],
+      shopNumber: [Validators.required, Validators.min(0)],
       shopName: ['', Validators.required],
       location: ['', Validators.required],
-      contactNumber: ['', Validators.required],
+      contactNumber: [Validators.required, Validators.min(0)],
       email: ['', Validators.required],
     });
   }

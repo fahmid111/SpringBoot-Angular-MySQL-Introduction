@@ -26,7 +26,7 @@ export class BookService {
     return this.http.delete<void>(url);
   }
 
-  public addBook(book: Book): Observable<any> {
+  public addBook(book: Book): Observable<Book[]> {
     // const { bookshop, ...bookDetails } = bookData;
     const bookArr: Book[] = [book];
     return this.http.post<any>(this.bookApiUrl, bookArr);
@@ -43,7 +43,7 @@ export class BookService {
     return this.http.get<Book>(url);
   }
 
-  public editBook(updatedBook: Book): Observable<any> {
+  public editBook(updatedBook: Book): Observable<Book> {
     const url = `${this.bookApiUrl}/${updatedBook.id}`;
     return this.http.put<any>(url, updatedBook);
   }
