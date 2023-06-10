@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Book } from 'src/app/models/book';
 import { Bookshop } from '../../models/bookshop';
 
@@ -41,17 +41,18 @@ export class BookshopService {
     return this.http.put(url, null, { params: queryParams });
   }
 
-  public addBookshop(bookshopData: any): Observable<any> {
-    const { books, ...bookshopDetails } = bookshopData;
-    return this.http.post<any>(this.bookshopApiUrl, bookshopDetails).pipe(
-      switchMap((response) => {
-        const bookshop_id = response.id;
-        const bookRequests = books.map((book: any) =>
-          this.addBookToBookshop(bookshop_id, book.id)
-        );
-        return forkJoin(bookRequests);
-      })
-    );
+  public addBookshop(bookshopData: Bookshop): Observable<Bookshop> {
+    // const { books, ...bookshopDetails } = bookshopData;
+    return this.http.post<any>(this.bookshopApiUrl, bookshopData);
+    // .pipe(
+    //   switchMap((response) => {
+    //     const bookshop_id = response.id;
+    //     const bookRequests = books.map((book: any) =>
+    //       this.addBookToBookshop(bookshop_id, book.id)
+    //     );
+    //     return forkJoin(bookRequests);
+    //   })
+    // );
   }
   public getTheBookshop(id: number): Observable<Bookshop> {
     const url = `${this.bookshopApiUrl}/${id}`;

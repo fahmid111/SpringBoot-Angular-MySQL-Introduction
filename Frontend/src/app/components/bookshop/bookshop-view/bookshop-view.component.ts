@@ -40,7 +40,7 @@ export class BookshopViewComponent {
     this.bookshopService.deleteBookshop(id).subscribe(
       () => {
         console.log('Bookshop deleted successfully');
-        this.router.navigate(['/edit-bookshop']);
+        this.router.navigate(['/bookshop']);
       },
       (error) => {
         console.error('Error deleting bookshop:', error);

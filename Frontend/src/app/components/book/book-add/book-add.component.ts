@@ -24,9 +24,9 @@ export class BookAddComponent implements OnInit {
       country: ['', Validators.required],
       language: ['', Validators.required],
       link: ['', Validators.required],
-      pages: ['', Validators.required],
-      year: ['', Validators.required],
-      price: ['', Validators.required],
+      pages: ['', [Validators.required, Validators.min(0)]],
+      year: ['', [Validators.required, Validators.min(0)]],
+      price: ['', [Validators.required, Validators.min(0)]],
       // bookshop: ['', Validators.required],
     });
   }

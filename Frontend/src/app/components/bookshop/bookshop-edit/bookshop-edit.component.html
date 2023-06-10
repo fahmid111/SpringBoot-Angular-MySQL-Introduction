@@ -8,13 +8,15 @@
   class="bookshop-form"
 >
   <div class="form-group">
-    <label>Shop Number:</label>
-    <input type="number" formControlName="shopNumber" class="form-control" />
-  </div>
-  <div class="form-group">
     <label>Shop Name:</label>
     <input type="text" formControlName="shopName" class="form-control" />
   </div>
+
+  <div class="form-group">
+    <label>Shop Number:</label>
+    <input type="number" formControlName="shopNumber" class="form-control" />
+  </div>
+
   <div class="form-group">
     <label>location:</label>
     <input type="text" formControlName="location" class="form-control" />
@@ -55,7 +57,7 @@
             <td>{{ book.author }}</td>
             <td>{{ book.country }}</td>
             <td>{{ book.language }}</td>
-            <td>{{ book.price }}</td>
+            <td>${{ book.price }}</td>
           </tr>
         </tbody>
       </table>
@@ -87,18 +89,19 @@
             <td>{{ book.author }}</td>
             <td>{{ book.country }}</td>
             <td>{{ book.language }}</td>
-            <td>{{ book.price }}</td>
+            <td>${{ book.price }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="middle-button">
+    <br />
     <button
       type="submit"
       [disabled]="!editBookshopForm.valid"
-      class="btn btn-primary"
+      class="btn btn-primary custom-button"
     >
       Save
     </button>

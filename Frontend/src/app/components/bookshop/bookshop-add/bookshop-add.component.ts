@@ -60,6 +60,7 @@ export class BookshopAddComponent implements OnInit {
   onSubmit(): void {
     if (this.bookshopForm.valid) {
       const bookshopData = {
+        id: 0,
         shopName: this.bookshopForm.value.shopName,
         shopNumber: this.bookshopForm.value.shopNumber,
         location: this.bookshopForm.value.location,
@@ -67,6 +68,7 @@ export class BookshopAddComponent implements OnInit {
         email: this.bookshopForm.value.email,
         books: this.selectedBooks,
       };
+      console.log(bookshopData);
       this.bookshopService.addBookshop(bookshopData).subscribe(
         () => {
           console.log('Bookshop added successfully');

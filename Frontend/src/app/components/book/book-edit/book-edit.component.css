@@ -59,3 +59,13 @@
   background-color: #bfbfbf;
   cursor: not-allowed;
 }
+
+.middle-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+}
+.custom-button {
+  width: 200px;
+}
